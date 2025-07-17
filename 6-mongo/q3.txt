@@ -1,0 +1,16 @@
+In the employees collection of the company database, display all the inserted employee documents.
+
+Step 1: Use the company database
+use company
+
+
+Step 2: Insert some employee documents
+db.employees.insertMany([
+  { name: "Rahul", age: 30, department: "HR" },
+  { name: "Sneha", age: 28, department: "IT" },
+  { name: "Amit", age: 35, department: "Finance" }
+])
+
+
+Step 3: Display all employee documents
+db.employees.find().pretty()

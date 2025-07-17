@@ -1,0 +1,40 @@
+From the employee collection, delete the document where name is 'Manoj'
+
+
+🔹 Step 1: Open MongoDB Shell
+
+mongosh
+
+
+
+🔹 Step 2: Use the company database
+
+use company
+
+
+
+🔹 Step 3: Insert a sample employee named "Manoj"
+
+db.employee.insertOne({ name: "Manoj", age: 30, department: "Sales" })
+
+
+
+🔹 Step 4: Verify the insertion
+
+db.employee.find()
+
+You should see something like:
+
+{ "_id": ObjectId("..."), "name": "Manoj", "age": 30, "department": "Sales" }
+
+
+
+🔹 Step 5: Delete the document where name is "Manoj"
+
+db.employee.deleteOne({ name: "Manoj" })
+
+
+
+🔹 Step 6: Confirm deletion
+
+db.employee.find()

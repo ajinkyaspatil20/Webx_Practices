@@ -1,0 +1,14 @@
+Option 1: Using Mongo Shell
+use collegeDB
+
+db.createCollection("students")
+
+This switches to (or creates) the collegeDB database and creates a students collection.
+
+
+Option 2: Insert a document directly (auto-creates DB and collection)
+use collegeDB
+
+db.students.insertOne({ name: "John", age: 20, course: "WebX" })
+
+This will create both the collegeDB and the students collection automatically if they don’t exist.

@@ -1,0 +1,13 @@
+From the students collection, delete the document where name is 'Ravi'
+
+
+Step 1: Use the collegeDB database
+use collegeDB
+
+
+Step 2: Insert the document
+db.students.insertOne({ name: "Ravi", age: 20, course: "WebX" })
+
+
+Step 3: Delete the document where name is 'Ravi'
+db.students.deleteOne({ name: "Ravi" })

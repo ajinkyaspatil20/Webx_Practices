@@ -1,0 +1,16 @@
+In the students collection of the collegeDB database, display all the inserted student documents.
+
+Step 1: Use the database
+use collegeDB
+
+
+Step 2: Insert student documents into the students collection
+db.students.insertMany([
+  { name: "Alice", age: 21, course: "WebX" },
+  { name: "Bob", age: 22, course: "AI" },
+  { name: "Charlie", age: 23, course: "ML" }
+])
+
+
+Step 3: Display all student documents
+db.students.find().pretty()
