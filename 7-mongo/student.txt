@@ -1,0 +1,33 @@
+Create a new database to storage student details of IT dept( Name, Roll no,  class name)  and perform the following on the database
+
+use IT_Dept
+
+1. Insert one student details
+db.students.insertOne({
+    Name: "Rahul Sharma",
+    RollNo: 101,
+    Class: "IT-3A"
+})
+
+2. Insert at once multiple student details
+db.students.insertMany([
+    { Name: "Sneha Patil", RollNo: 102, Class: "IT-3A" },
+    { Name: "Amit Desai", RollNo: 103, Class: "IT-3A" },
+    { Name: "Priya Nair", RollNo: 104, Class: "IT-3B" },
+    { Name: "Rohan Mehta", RollNo: 105, Class: "IT-3B" }
+])
+
+3. Display student for a particular class
+db.students.find({ Class: "IT-3A" })
+
+4. Display students of specific roll no in a class
+db.students.find({ RollNo: 103, Class: "IT-3A" })
+
+5. Change the roll no of a student 
+db.students.updateOne(
+    { Name: "Rahul Sharma", Class: "IT-3A" },
+    { $set: { RollNo: 110 } }
+)
+
+6. Delete entries of particular student 
+db.students.deleteOne({ Name: "Amit Desai", Class: "IT-3A" })
