@@ -1,0 +1,60 @@
+Build a Flask API with a GET route /students that fetches and returns all documents from the students collection in MongoDB.
+
+
+Step 1: Insert data into the students collection (using MongoDB shell)
+First, insert some data into the students collection using the MongoDB shell:
+
+use collegeDB
+
+db.students.insertMany([
+  { name: "Alice", age: 21, course: "WebX" },
+  { name: "Bob", age: 22, course: "AI" },
+  { name: "Charlie", age: 23, course: "ML" }
+])
+
+
+
+Step 2: Set up your Flask app and connect to MongoDB using PyMongo
+Install Flask and PyMongo:
+
+pip install Flask pymongo
+
+
+
+Step 3: Create the Flask app
+Here’s the code for the Flask app that will fetch and return all documents from the students collection:
+
+from flask import Flask, jsonify
+from pymongo import MongoClient
+
+app = Flask(__name__)
+
+# MongoDB connection
+client = MongoClient('mongodb://localhost:27017/')
+db = client['collegeDB']
+students_collection = db['students']
+
+@app.route('/students', methods=['GET'])
+def get_students():
+    # Fetch all documents from the students collection
+    students = list(students_collection.find({}, {'_id': 0}))  # Exclude the _id field
+    return jsonify(students)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+Explanation:
+MongoClient('mongodb://localhost:27017/'): This connects to the local MongoDB server.
+
+students_collection.find({}, {'_id': 0}): This fetches all documents from the students collection, excluding the _id field for cleaner output.
+
+jsonify(students): This converts the list of students into a JSON response.
+
+
+
+Step 4: Run the Flask App
+To run the Flask app, save the code in a file (e.g., app.py) and execute it:
+
+python app.py
+Now, if you visit http://127.0.0.1:5000/students in your browser, you’ll get a JSON response with the list of students from the students collection in MongoDB.

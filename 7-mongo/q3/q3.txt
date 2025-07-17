@@ -1,0 +1,63 @@
+Build a Flask API with a GET route /staff that fetches and returns all documents from the staff collection in MongoDB.
+
+
+
+Step 1: Insert Data into the staff Collection (using MongoDB shell)
+First, insert some sample data into the staff collection using the MongoDB shell:
+
+use company
+
+db.staff.insertMany([
+  { name: "John", position: "Manager", department: "Sales" },
+  { name: "Sara", position: "Developer", department: "IT" },
+  { name: "Mike", position: "HR", department: "Human Resources" }
+])
+
+
+
+Step 2: Install Required Libraries
+If you haven’t already, install the necessary libraries for Flask and PyMongo by running:
+
+pip install Flask pymongo
+
+
+
+Step 3: Create the Flask API
+Here’s the Python code for the Flask API that will fetch and return all documents from the staff collection:
+
+from flask import Flask, jsonify
+from pymongo import MongoClient
+
+app = Flask(__name__)
+
+# MongoDB connection
+client = MongoClient('mongodb://localhost:27017/')
+db = client['company']  # Use the 'company' database
+staff_collection = db['staff']  # Use the 'staff' collection
+
+@app.route('/staff', methods=['GET'])
+def get_staff():
+    # Fetch all documents from the staff collection
+    staff = list(staff_collection.find({}, {'_id': 0}))  # Exclude the _id field for cleaner output
+    return jsonify(staff)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+Explanation:
+MongoClient('mongodb://localhost:27017/'): This connects to your local MongoDB server.
+
+staff_collection.find({}, {'_id': 0}): This fetches all documents from the staff collection, excluding the _id field for cleaner output.
+
+jsonify(staff): This converts the list of staff documents into a JSON response.
+
+
+
+Step 4: Run the Flask Application
+Save the code in a file, for example, app.py, and run it:
+
+python app.py
+
+
+Now, the Flask server will be running on http://127.0.0.1:5000. When you visit http://127.0.0.1:5000/staff, you’ll get a JSON response with the staff data

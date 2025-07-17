@@ -1,0 +1,96 @@
+Using Flask and MongoDB, create a simple API with a POST route /add-student that accepts JSON data with fields: name, rollNo, and department.
+
+
+
+Step 1: Install Required Libraries
+First, ensure you have Flask and PyMongo installed:
+
+pip install Flask pymongo
+
+
+
+Step 2: Create the Flask API
+Here’s the Python code for the Flask API:
+
+from flask import Flask, request, jsonify
+from pymongo import MongoClient
+
+app = Flask(__name__)
+
+# MongoDB connection
+client = MongoClient('mongodb://localhost:27017/')
+db = client['collegeDB']  # Use the 'collegeDB' database
+students_collection = db['students']  # Use the 'students' collection
+
+@app.route('/add-student', methods=['POST'])
+def add_student():
+    # Get JSON data from the request
+    student_data = request.get_json()
+
+    # Ensure the data contains the necessary fields
+    if 'name' not in student_data or 'rollNo' not in student_data or 'department' not in student_data:
+        return jsonify({"error": "Missing required fields: name, rollNo, department"}), 400
+    
+    # Insert the student data into the 'students' collection
+    students_collection.insert_one(student_data)
+
+    # Return a success response
+    return jsonify({"message": "Student added successfully!"}), 201
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+Explanation:
+MongoDB connection: MongoClient('mongodb://localhost:27017/') connects to the local MongoDB instance.
+
+Request handling: request.get_json() extracts the JSON data sent in the request body.
+
+Field validation: The if condition checks if all required fields (name, rollNo, and department) are present in the incoming data. If any are missing, it returns a 400 Bad Request response with an error message.
+
+Inserting the data: The insert_one() method inserts the student data into the students collection.
+
+Success response: It returns a 201 Created response with a success message when the student is added.
+
+
+
+
+Step 3: Run the Flask Application
+Save the code to a file (e.g., app.py) and run it:
+
+python app.py
+
+
+
+Step 4: Test the API with Postman or CURL
+You can use Postman or CURL to test the API.
+
+
+Using Postman:
+Method: POST
+
+URL: http://127.0.0.1:5000/add-student
+
+Body: JSON
+
+{
+  "name": "John Doe",
+  "rollNo": "1234",
+  "department": "Computer Science"
+}
+
+
+Using CURL:
+
+curl -X POST http://127.0.0.1:5000/add-student \
+-H "Content-Type: application/json" \
+-d '{"name": "John Doe", "rollNo": "1234", "department": "Computer Science"}'
+
+
+
+Step 5: Verify the Data Insertion
+To verify that the data was inserted correctly, you can query the students collection in MongoDB to check the newly added student.
+
+use collegeDB
+db.students.find()
