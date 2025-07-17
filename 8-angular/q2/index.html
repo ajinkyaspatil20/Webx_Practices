@@ -1,0 +1,30 @@
+<!-- Create an AngularJS app that takes a string input (e.g., a name) and displays the same string in uppercase -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Uppercase App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+    <div ng-controller="MainController">
+        <h2>Enter your name:</h2>
+        <input type="text" ng-model="name" placeholder="Enter name here">
+        <p>Uppercase Name: {{ name | uppercase }}</p>
+    </div>
+
+    <script>
+        // Step 2: Create the AngularJS App and Controller
+        var app = angular.module('myApp', []);
+
+        app.controller('MainController', function($scope) {
+            // Initialize the name variable
+            $scope.name = '';
+        });
+    </script>
+
+</body>
+</html>

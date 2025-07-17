@@ -1,0 +1,30 @@
+<!-- Create an AngularJS app with a controller named MainController -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+    <div ng-controller="MainController">
+        <h1>{{ greeting }}</h1>
+        <p>{{ message }}</p>
+    </div>
+
+    <script>
+        // Step 2: Create the AngularJS App and Controller
+        var app = angular.module('myApp', []);
+
+        app.controller('MainController', function($scope) {
+            // Define variables in the controller
+            $scope.greeting = 'Hello, AngularJS!';
+            $scope.message = 'This is a simple AngularJS app with MainController.';
+        });
+    </script>
+
+</body>
+</html>

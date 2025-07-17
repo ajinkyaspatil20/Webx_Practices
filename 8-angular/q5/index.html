@@ -1,0 +1,25 @@
+<!-- Using AngularJS, create a simple app that takes the user's gender as input using an input box. -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gender Input</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="MainController">
+
+  <h2>Enter your gender:</h2>
+  <input type="text" ng-model="gender" placeholder="e.g. Male, Female, Other">
+
+  <p>Your gender is: {{ gender }}</p>
+
+  <script>
+    angular.module('myApp', [])
+      .controller('MainController', function($scope) {
+        $scope.gender = '';
+      });
+  </script>
+
+</body>
+</html>
