@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+</head>
+<body>
+    <h1>Feedback Form</h1>
+    <form method="POST">
+        Name: <input type="text" name="name"><br>
+        Feedback: <textarea name="feedback"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if name and feedback %}
+        <h2>Submitted Feedback</h2>
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Feedback:</strong> {{ feedback }}</p>
+    {% endif %}
+</body>
+</html>
