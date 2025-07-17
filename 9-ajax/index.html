@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Page</title>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Registration Form</h2>
+
+    <form id="registerForm">
+      <input type="text" id="name" placeholder="Name" required><br>
+
+      <input list="colleges" id="college" placeholder="College" required>
+      <datalist id="colleges">
+        <option value="COEP">
+        <option value="VJTI">
+        <option value="VESIT">
+        <option value="VIT">
+        <option value="IIT Bombay">
+        <option value="IIT Delhi">
+        <option value="BITS Pilani">
+      </datalist><br>
+
+      <input type="text" id="username" placeholder="Username" required><br>
+      <input type="password" id="password" placeholder="Password" required><br>
+      <input type="password" id="repassword" placeholder="Retype Password" required><br>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div id="error"></div>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    let existingUsers = ['test', 'admin', 'teacher'];
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let name = document.getElementById('name').value.trim();
+      let college = document.getElementById('college').value.trim();
+      let username = document.getElementById('username').value.trim();
+      let password = document.getElementById('password').value;
+      let repassword = document.getElementById('repassword').value;
+
+      let errorDiv = document.getElementById('error');
+      let messageDiv = document.getElementById('message');
+      errorDiv.innerText = '';
+      messageDiv.innerText = '';
+
+      if (name === '') {
+        errorDiv.innerText = 'Name cannot be empty.';
+        return;
+      }
+
+      if (existingUsers.includes(username)) {
+        errorDiv.innerText = 'Username already exists.';
+        return;
+      }
+
+      if (password !== repassword) {
+        errorDiv.innerText = 'Passwords do not match.';
+        return;
+      }
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 201) {
+          messageDiv.innerText = 'Successfully Registered';
+          existingUsers.push(username);
+          document.getElementById('registerForm').reset();
+        } else if (xhr.readyState === 4) {
+          errorDiv.innerText = 'An error occurred while registering.';
+        }
+      };
+
+      let data = JSON.stringify({
+        name: name,
+        college: college,
+        username: username,
+        password: password
+      });
+
+      xhr.send(data);
+    });
+  </script>
+
+
+</body>
+</html>
