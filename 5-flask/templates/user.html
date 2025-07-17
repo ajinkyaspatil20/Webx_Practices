@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome, {{ username }}{% endblock %}
+
+{% block content %}
+    <h2>Hello, {{ username }}!</h2>
+    <p>Welcome to your personalized page.</p>
+
+    {% if username.lower() == 'admin' %}
+        <p><strong>Note:</strong> You have admin privileges.</p>
+    {% else %}
+        <p>Enjoy exploring our website!</p>
+    {% endif %}
+{% endblock %}
