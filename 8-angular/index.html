@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="webxApp">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+  </head>
+  <body ng-controller="MainController">
+    <div class="container">
+        
+
+      <!-- 1. One-way Binding -->
+      <div class="section">
+        <h2>One-way Binding Example</h2>
+        <div class="form-group">
+          <input
+            type="text"
+            ng-model="oneWayInput"
+            placeholder="Type something"
+          />
+          <p><strong>One-way:</strong> {{ oneWayInput }}</p>
+        </div>
+      </div>
+
+
+      <!-- 2. Two-way Binding -->
+      <div class="section">
+        <h2>Two-way Binding Example</h2>
+        <div class="two-way-demo">
+          <input
+            type="text"
+            ng-model="twoWayInput"
+            placeholder="Type something"
+          />
+          <p>
+            <strong>Two-way:</strong>
+            <input type="text" ng-model="twoWayInput" />
+          </p>
+        </div>
+      </div>
+
+
+      <!-- Login Form -->
+      <h3>Login</h3>
+      <form name="loginForm" ng-submit="login()" novalidate>
+        <label>Username:</label>
+        <input type="text" ng-model="loginData.username" required /><br /><br />
+        <label>Password:</label>
+        <input
+          type="password"
+          ng-model="loginData.password"
+          required
+        /><br /><br />
+        <button type="submit">Login</button>
+      </form>
+
+
+      <p class="success" ng-if="loginSuccess">{{ message }}</p>
+      <p class="error" ng-if="loginError">{{ message }}</p>
+
+
+      <!-- Book Filter -->
+      <h3>Book Search</h3>
+      <input
+        type="text"
+        ng-model="searchText"
+        placeholder="Search by title, author, or genre"
+      />
+      <ul>
+        <li ng-repeat="book in books | bookFilter:searchText">
+          {{ book.title }} by {{ book.author }} ({{ book.genre }})
+        </li>
+      </ul>
+    </div>
+
+
+    <script src="app.js"></script>
+  </body>
+</html>
