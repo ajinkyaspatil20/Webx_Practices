@@ -1,0 +1,54 @@
+Create a database, create a collection, insert data, query and manipulate data using various MongoDB operations.
+
+1. Create a database named "inventory".
+use inventory
+
+2. Create a collection named "products" with the fields: (ProductID, ProductName, Category, Price, Stock).
+db.createCollection("products")
+
+3. Insert 10 documents into the "products" collection.
+db.products.insertMany([
+    { ProductID: 1, ProductName: "Laptop", Category: "Electronics", Price: 800, Stock: 10 },
+    { ProductID: 2, ProductName: "Smartphone", Category: "Electronics", Price: 500, Stock: 20 },
+    { ProductID: 3, ProductName: "Tablet", Category: "Electronics", Price: 300, Stock: 15 },
+    { ProductID: 4, ProductName: "Headphones", Category: "Electronics", Price: 100, Stock: 25 },
+    { ProductID: 5, ProductName: "Keyboard", Category: "Accessories", Price: 50, Stock: 30 },
+    { ProductID: 6, ProductName: "Mouse", Category: "Accessories", Price: 30, Stock: 40 },
+    { ProductID: 7, ProductName: "Monitor", Category: "Electronics", Price: 200, Stock: 12 },
+    { ProductID: 8, ProductName: "Printer", Category: "Electronics", Price: 150, Stock: 8 },
+    { ProductID: 9, ProductName: "Speakers", Category: "Electronics", Price: 90, Stock: 18 },
+    { ProductID: 10, ProductName: "Charger", Category: "Accessories", Price: 20, Stock: 50 }
+])
+
+4. Display all the documents in the "products" collection.
+db.products.find()
+
+5. Display all the products in the "Electronics" category.
+db.products.find({ Category: "Electronics" })
+
+6. Display all the products in ascending order of their names.
+db.products.find().sort({ ProductName: 1 })
+
+7. Display the details of the first 5 products.
+db.products.find().limit(5)
+
+8. Display the categories of products with a specific name.
+db.products.find({ ProductName: "Laptop" }, { Category: 1, _id: 0 })
+
+9. Display the number of products in the "Electronics" category.
+db.products.countDocuments({ Category: "Electronics" })
+
+10. Display all the products without showing the "_id" field.
+db.products.find({}, { _id: 0 })
+
+11. Display all the distinct categories of products.
+db.products.distinct("Category")
+
+12. Display products in the "Electronics" category with prices greater than 50 but less than 100.
+db.products.find({ Category: "Electronics", Price: { $gt: 50, $lt: 100 } })
+
+13. Change the price of a product.
+db.products.updateOne({ ProductName: "Laptop" }, { $set: { Price: 850 } })
+
+14. Delete a particular product entry.  
+db.products.deleteOne({ ProductName: "Printer" })
