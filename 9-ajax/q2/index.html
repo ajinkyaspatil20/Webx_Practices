@@ -1,0 +1,59 @@
+<!-- Create a simple form with two fields: Name and Email. When the user submits the form, use AJAX to send the form data to a dummy server  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Form Submission</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h2>Submit your details:</h2>
+    
+    <form id="userForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <div id="result"></div>
+
+    <script>
+        // jQuery function to handle the form submission
+        $('#userForm').submit(function(event) {
+            event.preventDefault();  // Prevent the form from submitting the traditional way
+            
+            // Get the form data
+            var formData = {
+                name: $('#name').val(),
+                email: $('#email').val()
+            };
+            
+            // AJAX request to send data to a dummy server
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',  // Dummy server URL
+                method: 'POST',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
+                success: function(response) {
+                    // On success, display a success message
+                    $('#result').html('<p style="color: green;">Form submitted successfully!</p>' +
+                                      '<pre>' + JSON.stringify(response, null, 2) + '</pre>');
+                },
+                error: function() {
+                    // On error, display an error message
+                    $('#result').html('<p style="color: red;">Error submitting form.</p>');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

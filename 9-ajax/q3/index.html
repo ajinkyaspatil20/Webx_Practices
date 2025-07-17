@@ -1,0 +1,40 @@
+<!-- Create a webpage with a button. When the button is clicked, use AJAX to request JSON data -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Button Request</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h2>Click the button to request data:</h2>
+    <button id="fetchDataButton">Fetch Data</button>
+
+    <h3>Received Data:</h3>
+    <pre id="result"></pre>
+
+    <script>
+        // jQuery to handle the button click event
+        $('#fetchDataButton').click(function() {
+            // AJAX request to fetch JSON data from a remote server
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/todos/1',  // Example dummy API
+                method: 'GET',  // Use GET to fetch data
+                success: function(response) {
+                    // On success, display the response data
+                    $('#result').html(JSON.stringify(response, null, 2));  // Format the JSON for better readability
+                },
+                error: function() {
+                    // On error, display an error message
+                    $('#result').html('Error fetching data!');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

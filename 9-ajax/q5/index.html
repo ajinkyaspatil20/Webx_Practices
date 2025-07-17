@@ -1,0 +1,48 @@
+<!-- Create a simple form with two fields: Name and Email. When the user submits the form, use AJAX to send the form data to a dummy server  -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX Form Submission</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <h2>Submit Your Info</h2>
+
+  <form id="userForm">
+    Name: <input type="text" name="name" required><br><br>
+    Email: <input type="email" name="email" required><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="responseMsg"></p>
+
+  <script>
+    $('#userForm').on('submit', function(e) {
+      e.preventDefault(); // prevent default form submission
+
+      var formData = {
+        name: $('input[name="name"]').val(),
+        email: $('input[name="email"]').val()
+      };
+
+      $.ajax({
+        url: 'https://jsonplaceholder.typicode.com/posts',
+        type: 'POST',
+        data: JSON.stringify(formData),
+        contentType: 'application/json; charset=UTF-8',
+        success: function(response) {
+          $('#responseMsg').text('Form submitted successfully!');
+          console.log(response); // For debugging
+        },
+        error: function() {
+          $('#responseMsg').text('Failed to submit form.');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
