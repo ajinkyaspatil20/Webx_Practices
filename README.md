@@ -1,4 +1,4 @@
-## 🌐 WebX Practices Repository
+### 🌐 WebX Practices Repository
 
 Welcome to **WebX Practices** — your one-stop repository for hands-on code snippets, practice questions, and mini-projects covering the modern full-stack web development landscape!
 
